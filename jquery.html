@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lazy loading using only JS</title>
+    <style>
+     *{
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+
+        .container{
+            width: 800px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .container__image{
+            display: block;
+            width: 100%;
+            height: 100vh;
+            -o-object-fit: cover;
+            object-fit: cover;
+        }
+
+        .fade{
+            animation: mymove 5s;
+        }
+        
+        @keyframes mymove{
+            from{ margin-left: 100%; opacity: 0}
+            to{ margin-left: 0px; opacity: 1}
+        }   
+        </style>
+    <script src="./complementar/jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <img class="container__image" src="imgs/1.jpg" alt="img" />
+        <img class="container__image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/2.jpg" alt="img" />
+        <img class="container__image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/3.jpg" alt="img" />
+        <img class="container__image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/4.jpg" alt="img" />
+        <img class="container__image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/5.jpg" alt="img" />
+    </div>
+    <script>
+    $(function(){
+        $(window).on('scroll resize',lazyload);
+        lazyload();
+    })
+
+    function lazyload(){
+        $('.lazy').each(function(index,element){
+            if (isIntersecting(element)) {
+                $(element).attr('src', $(element).attr('data-src'));
+                $(element).removeClass(['lazy'])
+            }
+        })
+    }
+
+    function isIntersecting(element){
+        // Pega as coordenadas da parte de baixo do viewport
+        const win = $(window);
+        const win_top = win.scrollTop();
+        const win_bottom = win_top + win.height()
+
+        // Pega as coordenadas do topo do elemento observado
+        const element_top_position = $(element).offset().top;
+
+        return (element_top_position < win_bottom)
+    }
+
+    </script>
+</body>
+
+</html>

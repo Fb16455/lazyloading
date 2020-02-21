@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lazy loading using only JS</title>
+    <style>
+    * {
+        padding: 0px;
+        margin: 0px;
+        box-sizing: border-box;
+    }
+
+    .container {
+        width: 800px;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    .container__image {
+        display: block;
+        width: 100%;
+        height: 100vh;
+        -o-object-fit: cover;
+        object-fit: cover;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img class="container__image" src="imgs/1.jpg" alt="img" />
+        <img class="container__image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/2.jpg" alt="img" />
+        <img class="container__image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/3.jpg" alt="img" />
+        <img class="container__image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/4.jpg" alt="img" />
+        <img class="container__image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/5.jpg" alt="img" />
+    </div>
+    <script>
+    window.addEventListener('load', function() {
+        const lazyImgs = document.querySelectorAll('.lazy');
+        lazyImgs.forEach(function(img) {
+            img.src = img.dataset.src;
+        })
+    })
+    </script>
+</body>
+
+</html>

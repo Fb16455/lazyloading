@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title> Plug-in JQuery para lazy load </title>
+    <script src="complementar/jquery.lazyscript.js"></script>
+    <script src="complementar/jquery-3.4.1.min.js"></script>
+    <style>
+    * {
+        padding: 0px;
+        margin: 0px;
+        box-sizing: border-box;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        width: 800px;
+        margin: 0 auto;
+    }
+
+    .image {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img class="image" src="1.jpg" alt="img" />
+        <img data-loader="image" class="image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="2.jpg" alt="img" />
+        <img data-loader="image" class="image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="3.jpg" alt="img" />
+        <img data-loader="image" class="image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="4.jpg" alt="img" />
+        <img data-loader="image" class="image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="5.jpg" alt="img" />
+    </div>
+    <script>
+    $(function() {
+        $(window).lazyScript({
+            callback: function($element) {
+                var url = $element.data('src');
+                $element.load(url);
+            }
+        });
+    });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Intersection Observer EC5</title>
+    <meta name="description" content="A column-like gallery with images that fade in as user scrolls the site">
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+
+        .container{
+            width: 800px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .container__image{
+            display: block;
+            width: 100%;
+            height: 100vh;
+            -o-object-fit: cover;
+            object-fit: cover;
+        }
+
+	</style>
+</head>
+
+<body>
+    <div class="container">
+        <img class="container__image" src="imgs/1.jpg" alt="img" />
+        <img class="container__image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/2.jpg" alt="img" />
+        <img class="container__image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/3.jpg" alt="img" />
+        <img class="container__image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/4.jpg" alt="img" />
+        <img class="container__image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/5.jpg" alt="img" />
+        <picture class="container__image lazy">
+            <source srcset="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-srcset="imgs/6.webp" type="image/webp" alt="...">
+            <source srcset="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-srcset="imgs/6.jpg" type="image/jpg" alt="...">
+            <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/6.jpg" alt="..." class="container__image">
+        </picture>
+    </div>
+    <script>
+    /* 
+     *  Load images when necessary and add a fade in affect to it
+     *  It doesn't works properly when loading images inside picture element
+     *  It only works properly when the styles is applied to the picture element
+     */
+
+    var lazyImgs = [].slice.call(document.getElementsByClassName('lazy'));
+
+    var config = {
+        root: null,
+        marginRoot: "0px",
+        threshold: 0
+    }
+    
+    //
+    var observer = new IntersectionObserver(function(entries, self) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                var element = entry.target;
+                if (element.tagName.toLowerCase() == 'img') {
+                    element.src = element.dataset.src;
+                } else if (element.tagName.toLowerCase() == 'picture') {
+                    var sources = [].slice.call(element.getElementsByTagName('source'));
+                    for (var i = 0; i < sources.length; i++) {
+                        sources[i].srcset = sources[i].dataset.srcset;
+                    }
+                }
+
+                self.unobserve(element);
+            }
+        });
+    }, config);
+
+    lazyImgs.forEach(function(lazyImg) {
+        observer.observe(lazyImg);
+    });
+    </script>
+</body>
+
+</html>

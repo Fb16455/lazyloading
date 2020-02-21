@@ -1,0 +1,45 @@
+Hi guys.
+
+I'm trying to use the loading attribute for lazy loading my images, but it is not working.
+
+With the following CSS code:
+
+``` 
+<style>
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 800px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.container__image {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+}
+</style>
+```
+
+And the following markup:
+
+```
+<div class="container">
+    <img class="container__image" src="imgs/1.jpg" alt="..." />
+    <img class="container__image" src="imgs/2.jpg" loading="lazy" alt="..." />
+    <img class="container__image" src="imgs/3.jpg" loading="lazy" alt="..." />
+</div>
+```
+
+I tried tUsing the browsers Edge v79 and Chrome v79, which according to caniuse that feature works on these browsers, but all images are downloaded, even the images that are not appearing in the viewport at first.
+
+I usually use IntersectionObserver for that, but i would like a solution without JS as loading attribute is suppose to give.
+
+Has anyone here tried to use the loading attribute for the lazy loading of images and that saw it working?

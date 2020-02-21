@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title> Plug-in JQuery para lazy load </title>
+    <script src="complementar/lozad.min.js"></script>
+    <script src="complementar/jquery-3.4.1.min.js"></script>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+
+        .container{
+            width: 800px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .container__image{
+            display: block;
+            width: 100%;
+            height: 100vh;
+            -o-object-fit: cover;
+            object-fit: cover;
+        }
+
+        .fade{
+            animation: mymove 5s;
+        }
+        
+        @keyframes mymove{
+            from{ margin-left: 100%; opacity: 0}
+            to{ margin-left: 0px; opacity: 1}
+        }   
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img class="container__image" src="imgs/1.jpg" alt="img" />
+        <img class="container__image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/2.jpg" alt="img" />
+        <img class="container__image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/3.jpg" alt="img" />
+        <img class="container__image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/4.jpg" alt="img" />
+        <img class="container__image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/5.jpg" alt="img" />
+
+        <picture class="container__image lazy" data-iesrc="imgs/6.jpg">
+            <source srcset="imgs/6.webp" type="image/webp" alt="...">
+            <source srcset="imgs/6.jpg" type="image/jpg" alt="...">
+        </picture>
+    </div>
+    <script>
+    const observer = lozad('.lazy', {
+        marginRoot: "-200px",
+        threshold: 0.5,
+        loaded: function(el) {
+            el.classList.add('loaded');
+        }
+    });
+    observer.observe();
+    </script>
+</body>
+
+</html>

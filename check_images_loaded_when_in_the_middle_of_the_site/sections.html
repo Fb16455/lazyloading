@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    img {
+        width: 500px;
+        height: 100vh;
+        object-fit: cover;
+    }
+    </style>
+</head>
+
+<body>
+    <h2 id="section-1">Prieira seção</h2>
+    <img class="container__image" src="../imgs/1.jpg" alt="img" />
+    <h2 id="section-2" class="lazy">Segunda seção</h2>
+    <img class="container__image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="../imgs/2.jpg" alt="img" />
+    <h2 id="section-3" class="lazy">Terceira seção</h2>
+    <img class="container__image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="../imgs/3.jpg" alt="img" />
+</body>
+<script>
+var lazyImgs = [].slice.call(document.getElementsByClassName('lazy'));
+
+function isIntersecting(el){
+	const rect = el.getBoundingClientRect().top
+
+	return rect < window.innerHeight;
+}
+window.addEventListener('load', ()=>{
+	lazyImgs.forEach(lazy=>{
+		if (isIntersecting(lazy)) {
+			lazy.src = lazy.dataset.src;
+		}
+	})
+})
+</script>
+
+</html>

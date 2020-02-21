@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Intersection Observer</title>
+    <meta name="description" content="A column-like gallery with images that fade in as user scrolls the site">
+    <!--<script src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver"></script>-->
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+
+        .container{
+            width: 800px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .container__image{
+            display: block;
+            width: 100%;
+            height: 100vh;
+            -o-object-fit: cover;
+            object-fit: cover;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img class="container__image" src="imgs/1.jpg" alt="img" />
+        <img class="container__image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/2.jpg" alt="img" />
+        <img class="container__image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/3.jpg" alt="img" />
+        <img class="container__image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/4.jpg" alt="img" />
+        <img class="container__image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/5.jpg" alt="img" />
+        <picture class="container__image lazy">
+            <source srcset="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-srcset="imgs/6.webp" type="image/webp" alt="...">
+            <source srcset="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-srcset="imgs/6.jpg" type="image/jpg" alt="...">
+            <!-- I set this -->
+            <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/6.jpg" alt="..." class="container__image">
+        </picture>
+    </div>
+    <script>
+    var lazyload = function() {
+        /* 
+         *  Load images when necessary and add a fade in affect to it
+         *  It doesn't works properly when loading images inside picture element
+         *  It only works properly when the styles is applied to the picture element
+         */
+
+        var lazyImgs = [].slice.call(document.getElementsByClassName('lazy'));
+
+        var config = {
+            root: null,
+            marginRoot: "0px",
+            threshold: 0.5
+        }
+
+        var observer = new IntersectionObserver(function(entries, self) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    var element = entry.target;
+                    if (element.tagName.toLowerCase() == 'img') {
+                        element.src = element.dataset.src;
+                    } else if (element.tagName.toLowerCase() == 'picture') {
+                        var sources = [].slice.call(element.getElementsByTagName('source'));
+                        for (var i = 0; i < sources.length; i++) {
+                            sources[i].srcset = sources[i].dataset.srcset;
+                        }
+
+                        // if you use the  getElementsByTagName it must be converted into an array and then we can iterate it.
+                        let img = element.querySelector('img')
+                        img.src = img.dataset.src
+                    }
+                    // Add fade in on the img element within picture element
+                    self.unobserve(element);
+                }
+            });
+        }, config);
+
+        lazyImgs.forEach(function(lazyImg) {
+            observer.observe(lazyImg);
+        });
+    }
+
+    if ("IntersectionObserver" in window) {
+        if (!('isIntersecting' in window.IntersectionObserverEntry.prototype)) {
+
+            Object.defineProperty(window.IntersectionObserverEntry.prototype,
+                'isIntersecting', {
+                    get: function() {
+                        return this.intersectionRatio > 0;
+                    }
+                });
+        }
+
+        lazyload();
+    } else {
+        var script = document.createElement('script')
+        script.src = './complementar/intersection-observer.js'
+        script.onload = lazyload
+        document.head.appendChild(script);
+    }
+    </script>
+</body>
+
+</html>

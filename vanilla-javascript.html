@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lazy loading using only JS</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+
+        .container{
+            width: 800px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .container__image{
+            display: block;
+            width: 100%;
+            height: 635px;
+            -o-object-fit: cover;
+            object-fit: cover;
+        }   
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img class="container__image" src="imgs/1.jpg" alt="..." />
+        <img class="container__image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/2.jpg" alt="..." />
+        <img class="container__image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/3.jpg" alt="..." />
+        <img class="container__image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/4.jpg" alt="..." />
+        <img class="container__image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/5.jpg" alt="..." />
+        <picture class="lazy container__image">
+            <source srcset="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-srcset="imgs/6.webp" type="image/webp">
+            <source srcset="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-srcset="imgs/6.jpg" type="image/jpeg">
+            <img src="imgs/6.jpg" alt="..." class="container__image">
+        </picture>
+    </div>
+    <script>
+    // Busca as imagens que serão carregadas usando a técnica de 
+    // carregamento lento.
+    var lazyImgs = [].slice.call(document.querySelectorAll('.lazy'));
+
+    // Responsável por verificar cada imagem no vator lazyImgs
+    var lazyload = function() {
+        for (var i = 0; i < lazyImgs.length; i++) {
+            console.log('hello');
+            // Retorna a coordenada do elemento relativo janela
+            var rect = lazyImgs[i].getBoundingClientRect();
+            // Checa se o elemento está minimamente dentro
+            // do viewport e carrega a imagem de acordo
+            // com o resultado.
+            if (rect.top < window.innerHeight &&
+                rect.top > 0 ||
+                rect.bottom < window.innerHeight &&
+                rect.bottom > 0 ||
+                rect.top == 0 &&
+                rect.bottom == window.innerHeight) {
+                if (lazyImgs[i].tagName == 'IMG') {
+                    var dtSrc = lazyImgs[i].getAttribute('data-src');
+                    lazyImgs[i].setAttribute('src', dtSrc);
+                } else if (lazyImgs[i].tagName == "PICTURE") {
+                    var sources = lazyImgs[i].querySelectorAll('source');
+                    sources.forEach(function(source) {
+                        var dtSrcset = source.getAttribute('data-srcset');
+                        source.setAttribute('srcset', dtSrcset);
+                    })
+                }
+                // Remove o elemento desnecessário da lista
+                // de elementos monitorados
+                lazyImgs[i].classList.remove('lazy');
+                lazyImgs = [].slice.call(document.querySelectorAll('.lazy'));
+            }
+        }
+    }
+
+    // Executa chama a função lazyload em diferentes cenários
+    window.addEventListener('DOMContentLoaded', lazyload)
+    window.addEventListener('scroll', lazyload)
+    window.addEventListener('resize', lazyload)
+    </script>
+</body>
+
+</html>

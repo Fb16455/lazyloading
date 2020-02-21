@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Immediately loaded images</title>
     <style>
-    *{
+        *{
             padding: 0px;
             margin: 0px;
             box-sizing: border-box;
@@ -44,18 +44,20 @@
         </picture>
     </div>
     <script>
+    window.onload = () => {
         const lazyImgs = document.querySelectorAll('.lazy');
-        lazyImgs.forEach(lazyImg=>{
+        lazyImgs.forEach(lazyImg => {
             console.log("hello")
             if (lazyImg.tagName == "IMG") {
                 lazyImg.src = lazyImg.dataset.src;
-            }else if (lazyImg.tagName == "PICTURE") {
-                const sources= lazyImg.querySelectorAll('source');
-                sources.forEach(source=>{
+            } else if (lazyImg.tagName == "PICTURE") {
+                const sources = lazyImg.querySelectorAll('source');
+                sources.forEach(source => {
                     source.srcset = source.dataset.srcset;
                 })
             }
         })
+    }
     </script>
 </body>
 

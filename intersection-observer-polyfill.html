@@ -59,7 +59,7 @@
         var config = {
             root: null,
             marginRoot: "0px",
-            threshold: 0.5
+            threshold: 0
         }
 
         var observer = new IntersectionObserver(function(entries, self) {
@@ -102,9 +102,9 @@
 
         lazyload();
     } else {
-        var script = document.createElement('script')
-        script.src = './complementar/intersection-observer.js'
-        script.onload = lazyload
+        var script = document.createElement('script');
+        script.src = './complementar/intersection-observer.js';
+        script.onload = lazyload;
         document.head.appendChild(script);
     }
     </script>

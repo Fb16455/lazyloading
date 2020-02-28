@@ -30,19 +30,18 @@
 </head>
 
 <body>
-	<div class="container">
-		<img  src="https://www.dropbox.com/s/kpire3km3xg3p53/1.jpg?raw=1" class="container__image" alt="..." />
-		    <img loading="lazy" class="container__image" src="imgs/1.jpg" alt="..." />
-		    <img loading="lazy" class="container__image" src="imgs/2.jpg" alt="..." />
-		    <img loading="lazy" class="container__image" src="imgs/3.jpg" alt="..." />
-		    <img loading="lazy" class="container__image" src="imgs/4.jpg" alt="..." />
-		    <img loading="lazy" class="container__image" src="imgs/5.jpg" alt="..." />
-		    <picture class="container__image">
-		        <source srcset="imgs/6.webp" type="image/webp">
-		        <source srcset="imgs/6.jpg" type="image/jpg">
-		        <img src="imgs/6.jpg" alt="..." class="container__image" loading="lazy">
-		    </picture>
-	</div>
+    <div class="container">
+        <img src="imgs/1.jpg" class="container__image" alt="..." />
+        <img loading="lazy" class="container__image" src="imgs/2.jpg" alt="..." />
+        <img loading="lazy" class="container__image" src="imgs/3.jpg" alt="..." />
+        <img loading="lazy" class="container__image" src="imgs/4.jpg" alt="..." />
+        <img loading="lazy" class="container__image" src="imgs/5.jpg" alt="..." />
+        <picture class="container__image">
+            <source srcset="imgs/6.webp" type="image/webp">
+            <source srcset="imgs/6.jpg" type="image/jpg">
+            <img src="imgs/6.jpg" alt="..." class="container__image" loading="lazy">
+        </picture>
+    </div>
     <script>
     console.log('loading' in HTMLImageElement.prototype);
     </script>

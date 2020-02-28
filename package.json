@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "intersection-observer": "^0.7.0"
+    "base64-img": "^1.0.4",
+    "intersection-observer": "^0.7.0",
+    "lqip": "^2.1.0"
   },
   "dependencies": {
     "lozad": "^1.14.0",

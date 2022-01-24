@@ -21,42 +21,42 @@
             overflow: hidden;
         }
 
-        .container__image,
-        .picture-container img{
+        .image-container{
+            display: block;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .image,
+        .image-container img{
             display: block;
             width: 100%;
             height: 100vh;
             -o-object-fit: cover;
             object-fit: cover;
         }
-
-         .picture-container{
-            display: block;
-            width: 100%;
-            height: 100vh;
-        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <img class="container__image" src="imgs/1.jpg" alt="img" />
+        <img class="image" src="imgs/1.jpg" alt="img" />
         <!-- Exemplo com <img> -->
-        <img class="container__image lozad" data-placeholder-background="blue" data-src="imgs/2.jpg" alt="img" />
-        <img class="container__image lozad" data-placeholder-background="blue" data-src="imgs/3.jpg" alt="img" />
-        <img class="container__image lozad" data-placeholder-background="blue" data-src="imgs/4.jpg" alt="img" />
-        <img class="container__image lozad" data-placeholder-background="blue" data-src="imgs/5.jpg" alt="img" />
-        <img class="container__image lozad" data-placeholder-background="blue" data-src="imgs/6.jpg" alt="..." />
-        <img class="container__image lozad" data-placeholder-background="blue" data-src="imgs/7.jpg" alt="..." />
-        <img class="container__image lozad" data-placeholder-background="blue" data-src="imgs/8.jpg" alt="..." />
-        <img class="container__image lozad" data-placeholder-background="blue" data-src="imgs/9.jpg" alt="..." />
-        <img class="container__image lozad" data-placeholder-background="blue" data-src="imgs/10.jpg" alt="..." />
-        <img class="container__image lozad" data-placeholder-background="blue" data-src="imgs/11.jpg" alt="..." />
-        <img class="container__image lozad" data-placeholder-background="blue" data-src="imgs/12.jpg" alt="..." />
-        <img class="container__image lozad" data-placeholder-background="blue" data-src="imgs/13.jpg" alt="..." />
+        <img class="image lozad" data-placeholder-background="blue" data-src="imgs/2.jpg" alt="img" />
+        <img class="image lozad" data-placeholder-background="blue" data-src="imgs/3.jpg" alt="img" />
+        <img class="image lozad" data-placeholder-background="blue" data-src="imgs/4.jpg" alt="img" />
+        <img class="image lozad" data-placeholder-background="blue" data-src="imgs/5.jpg" alt="img" />
+        <img class="image lozad" data-placeholder-background="blue" data-src="imgs/6.jpg" alt="..." />
+        <img class="image lozad" data-placeholder-background="blue" data-src="imgs/7.jpg" alt="..." />
+        <img class="image lozad" data-placeholder-background="blue" data-src="imgs/8.jpg" alt="..." />
+        <img class="image lozad" data-placeholder-background="blue" data-src="imgs/9.jpg" alt="..." />
+        <img class="image lozad" data-placeholder-background="blue" data-src="imgs/10.jpg" alt="..." />
+        <img class="image lozad" data-placeholder-background="blue" data-src="imgs/11.jpg" alt="..." />
+        <img class="image lozad" data-placeholder-background="blue" data-src="imgs/12.jpg" alt="..." />
+        <img class="image lozad" data-placeholder-background="blue" data-src="imgs/13.jpg" alt="..." />
 
         <!-- Exemplo com Picture -->
-        <picture class="picture-container lozad" data-iesrc="imgs/14.jpg">
+        <picture class="image-container lozad" data-iesrc="imgs/14.jpg">
             <source srcset="imgs/14.webp" type="image/webp" alt="...">
             <source srcset="imgs/14.jpg" type="image/jpg" alt="...">
         </picture>

@@ -38,16 +38,27 @@
 
 <body>
     <div class="container">
-        <img class="image" src="imgs/1.jpg" alt="img" />
-        <img class="image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/2.jpg" alt="img" />
-        <img class="image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/3.jpg" alt="img" />
-        <img class="image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/4.jpg" alt="img" />
-        <img class="image lazy" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="imgs/5.jpg" alt="img" />
+        <img class="image" src="imgs/1.jpg" alt="..." />
 
+        <!-- Example with images -->
+        <img class="image lazy" src="placeholder.jpg" data-src="imgs/2.jpg" alt="..." />
+        <img class="image lazy" src="placeholder.jpg" data-src="imgs/3.jpg" alt="..." />
+        <img class="image lazy" src="placeholder.jpg" data-src="imgs/4.jpg" alt="..." />
+        <img class="image lazy" src="placeholder.jpg" data-src="imgs/5.jpg" alt="..." />
+        <img class="image lazy" src="placeholder.jpg" data-src="imgs/6.jpg" alt="..." />
+        <img class="image lazy" src="placeholder.jpg" data-src="imgs/7.jpg" alt="..." />
+        <img class="image lazy" src="placeholder.jpg" data-src="imgs/8.jpg" alt="..." />
+        <img class="image lazy" src="placeholder.jpg" data-src="imgs/9.jpg" alt="..." />
+        <img class="image lazy" src="placeholder.jpg" data-src="imgs/10.jpg" alt="..." />
+        <img class="image lazy" src="placeholder.jpg" data-src="imgs/11.jpg" alt="..." />
+        <img class="image lazy" src="placeholder.jpg" data-src="imgs/12.jpg" alt="..." />
+        <img class="image lazy" src="placeholder.jpg" data-src="imgs/13.jpg" alt="..." />
+
+        <!-- Exemplo com Picture -->
         <picture class="image-container">
-            <source data-srcset="imgs/6.webp" type="image/webp" alt="..." />
-            <source data-srcset="imgs/6.jpg" type="image/jpg" alt="..." />
-            <img src="imgs/cinza.png" data-srcset="imgs/6.jpg x1" data-src="imgs/6.jpg" alt="..." class="image lazy" />
+            <source srcset="placeholder.jpg" data-srcset="imgs/14.webp" type="image/webp">
+            <source srcset="placeholder.jpg"data-srcset="imgs/14.jpg" type="image/jpg">
+            <img src="placeholder.jpg" data-src="imgs/14.jpg" alt="..." class="image lazy">
         </picture>
     </div>
     <script>

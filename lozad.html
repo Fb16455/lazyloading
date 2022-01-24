@@ -63,13 +63,14 @@
 
     </div>
     <script>
-    const observer = lozad('.lazy', {
-        marginRoot: "-200px",
-        threshold: 0.5,
-        loaded: function(el) {
-            el.classList.add('loaded');
-        }
-    });
+    // const observer = lozad('.lazy', {
+    //     marginRoot: "-200px",
+    //     threshold: 0.5,
+    //     loaded: function(el) {
+    //         el.classList.add('loaded');
+    //     }
+    // });
+    const observer = lozad();
     observer.observe();
     </script>
 </body>
